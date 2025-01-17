@@ -15,14 +15,14 @@ const HeroSection = () => {
             </motion.h1>
             <motion.p initial={{opacity: 0}}
                       animate={{opacity: 1}}
-                      transition={{duration: 1, delay: 0.5}} className="mx-auto max-w-2xl text-lg text-slate-700">
+                      transition={{duration: 1, delay: 0.5}} className="mx-auto max-w-2xl mt-5 text-lg text-slate-700">
                 AI-powered resume builder to create professional resumes effortlessly.
             </motion.p>
             <motion.div initial={{opacity: 0}}
                         animate={{opacity: 1}}
                         transition={{duration: 1, delay: 0}}
                         className="mt-10 flex justify-center gap-x-6">
-                <Button size="lg" variant="default" className="bg-teal-500 mt-8">Get Started for Free</Button>
+                <Button size="lg" variant="default" className="bg-teal-600 mt-8 font-bold hover:text-md hover:bg-teal-500">Get Started for Free</Button>
             </motion.div>
             <motion.div
                 initial={{opacity: 0, y: 50}}
