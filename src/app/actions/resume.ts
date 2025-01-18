@@ -49,7 +49,7 @@ export type Certification = {
 }
 
 export type Experience = {
-    id: string;
+    id?: string;
     title: string;
     company: string;
     location: string;
