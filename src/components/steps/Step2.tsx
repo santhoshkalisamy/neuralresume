@@ -6,6 +6,7 @@ import * as z from 'zod';
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useState} from "react";
+import { Textarea } from "@/components/ui/textarea"
 
 const Step2ExperienceSchema = z.object({
     company: z.string().min(2),
@@ -125,7 +126,7 @@ const Step2 = ({newResume, updateResume, close, goBack}: Step2Props) => {
 
                     <div className="space-y-2">
                         <Label htmlFor="responsibilities">Responsibilities</Label>
-                        <Input
+                        <Textarea
                             {...register('responsibilities')}
                             id="responsibilities"
                             name="responsibilities"
