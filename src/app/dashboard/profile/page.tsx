@@ -1,8 +1,11 @@
 import React from 'react'
+import {ContentLayout} from "@/components/content-layout";
 
-const Page = () => {
+const Page = async () => {
     return (
-        <div>Page</div>
+        <ContentLayout title={"Profile"}>
+            <h1>Profile</h1>
+        </ContentLayout>
     )
 }
 export default Page

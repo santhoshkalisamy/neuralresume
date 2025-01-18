@@ -36,7 +36,7 @@ const DashboardSidebar = (props:SidebarToggleProps) => {
                     variant="link"
                     asChild
                 >
-                    <Link href="/dashboard" className="flex items-center gap-2">
+                    <Link href="/" className="flex items-center gap-2">
                         <FileUserIcon className="w-8 h-8 mr-1"/>
                         <h1
                             className={cn(
