@@ -1,15 +1,15 @@
-import React, {useState} from 'react'
-import {Collapsible, CollapsibleContent} from "@radix-ui/react-collapsible";
-import {CollapsibleTrigger} from "@/components/ui/collapsible";
-import {Button} from "@/components/ui/button";
-import {Label} from "@/components/ui/label";
-import {Input} from "@/components/ui/input";
-import {Textarea} from "@/components/ui/textarea";
-import {Trash} from "lucide-react";
+import React, { useState } from 'react';
+import { Collapsible, CollapsibleContent } from "@radix-ui/react-collapsible";
+import { CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Trash } from "lucide-react";
 import * as z from "zod";
-import {useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {Experience} from "@/app/actions/resume";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Experience } from "@/app/actions/resume";
 
 type ExperienceFormProps = {
     experience: Experience,
@@ -29,14 +29,13 @@ const ExperienceFormSchema = z.object({
 
 type ExperienceFormType = z.infer<typeof ExperienceFormSchema>;
 
-
 const ExperienceForm = ({
                             experience, deleteExperience, updateExperience
                         }: ExperienceFormProps) => {
 
     const [expanded, setExpanded] = useState(true);
 
-    const {register, handleSubmit, formState: {errors}} = useForm<ExperienceFormType>({
+    const { register, handleSubmit, formState: { errors } } = useForm<ExperienceFormType>({
         resolver: zodResolver(ExperienceFormSchema), defaultValues: {
             company: experience.company,
             startDate: experience.startDate,
@@ -46,24 +45,6 @@ const ExperienceForm = ({
             responsibilities: experience.responsibilities,
         }
     });
-
-    /*    useEffect(() => {
-            reset({
-                company: experience.company,
-                startDate: experience.startDate,
-                endDate: experience.endDate,
-                title: experience.title,
-                location: experience.location,
-                responsibilities: experience.responsibilities,
-            });
-        }, []);
-
-        const watchedFields = useWatch({ control });
-
-        useEffect(() => {
-            autoSave(watchedFields);
-        }, [watchedFields]);*/
-
 
     const onSubmit = (data: ExperienceFormType) => {
         console.log("onsubmit", data);
@@ -85,11 +66,12 @@ const ExperienceForm = ({
         updateExperience(experience, experience.id!);
     }
 
-    return (<form key={experience.id} onSubmit={handleSubmit(onSubmit)}>
+    return (
+        <form key={experience.id} onSubmit={handleSubmit(onSubmit)}>
             <Collapsible key={experience.id}
                          open={expanded}
                          onOpenChange={open => setExpanded(open)}
-                         className="w-[350px] space-y-2"
+                         className="w-full md:w-[350px] space-y-2"
             >
                 <div className="flex items-center justify-between space-x-4 -ml-2">
                     <CollapsibleTrigger asChild>
@@ -105,13 +87,10 @@ const ExperienceForm = ({
                             })}) {expanded ? '▲' : '▼'}
                                 <span className="sr-only">Experience 1</span>
                             </Button>
-                                <Trash className="h-4 w-4 text-red-500 hover:cursor-pointer" onClick={() => deleteExperience(experience.id!)}/>
+                            <Trash className="h-4 w-4 text-red-500 hover:cursor-pointer" onClick={() => deleteExperience(experience.id!)} />
                         </div>
                     </CollapsibleTrigger>
                 </div>
-                {/*<div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
-                        @radix-ui/primitives
-                    </div>*/}
                 <CollapsibleContent className="space-y-2">
                     <div className="space-y-4">
                         <div className="space-y-2">
@@ -192,19 +171,13 @@ const ExperienceForm = ({
                             <p className="text-red-500 text-sm">{errors.responsibilities?.message}</p>
                         </div>
                         <input {...register("experienceId")} type="hidden" name="experienceId"
-                               id="experienceId" value={experience.id}/>
+                               id="experienceId" value={experience.id} />
                         <div className="flex justify-end gap-5">
-                            {/*<Button type="button" className="mb-10 bg-red-600 hover:bg-red-500"
-                                    onClick={() => deleteExperience(experience.id!)}>
-                                <Trash className="h-4 w-4 "/>
-                            </Button>*/}
-                            {/*<Button type="submit" className="mb-10">
-                                <SaveIcon/>
-                            </Button>*/}
                         </div>
                     </div>
                 </CollapsibleContent>
             </Collapsible>
-        </form>)
+        </form>
+    )
 }
-export default ExperienceForm
+export default ExperienceForm;

@@ -8,25 +8,25 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import {Plus} from "lucide-react";
+import { Plus } from "lucide-react";
 import Step1 from "@/components/steps/Step1";
 import Step2 from "@/components/steps/Step2";
 import Step3 from "@/components/steps/Step3";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { ResumeData } from "@/app/actions/resume";
-import {useResume} from "@/components/ResumeContext";
+import { useResume } from "@/components/ResumeContext";
 
 const ResumeCreationModal = () => {
     const [open, setOpen] = useState(false);
     const [currentStep, setCurrentStep] = useState(1);
 
-    const {newResume, setNewResume} =  useResume();
+    const { newResume, setNewResume } = useResume();
 
     function updateResumeAndGoToNextStep(resume: ResumeData) {
         console.log(resume);
         setNewResume(resume);
-        if(currentStep < 3) setCurrentStep((prevStep) => prevStep + 1);
+        if (currentStep < 3) setCurrentStep((prevStep) => prevStep + 1);
     }
 
     function goBack() {
@@ -39,7 +39,6 @@ const ResumeCreationModal = () => {
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            {/* Modal Trigger Button */}
             <DialogTrigger asChild>
                 <Button className="flex items-center gap-2">
                     <Plus className="w-4 h-4" />
@@ -47,31 +46,28 @@ const ResumeCreationModal = () => {
                 </Button>
             </DialogTrigger>
 
-            {/* Full-Screen Dialog Content */}
             <DialogContent
-                className="fixed min-w-3/4 min-h-2/4 max-h-[900px] bg-white p-8 shadow-lg z-50 overflow-y-auto flex flex-col items-center"
+                className="fixed w-full max-w-3xl min-h-2/4 max-h-[90vh] bg-white p-4 md:p-8 shadow-lg z-50 overflow-y-auto flex flex-col items-center"
             >
                 <DialogHeader className="w-full max-w-2xl">
-                    <DialogTitle className="text-3xl font-bold text-center">Create New Resume</DialogTitle>
+                    <DialogTitle className="text-2xl md:text-3xl font-bold text-center">Create New Resume</DialogTitle>
                     <DialogDescription className="text-center">
                         Let&#39;s start with some basic information about you.
                     </DialogDescription>
                 </DialogHeader>
 
-                {/* Progress Indicator */}
                 <div className="flex justify-center gap-2 my-4">
                     {[1, 2, 3].map((step) => (
                         <div
                             key={step}
                             className={cn(
-                                "h-2 w-12 md:w-20 rounded-full transition-all",
+                                "h-2 w-8 md:w-20 rounded-full transition-all",
                                 currentStep >= step ? "bg-blue-600" : "bg-gray-200"
                             )}
                         />
                     ))}
                 </div>
 
-                {/* Step Transition Animations */}
                 <div className="w-full max-w-2xl">
                     <AnimatePresence mode="wait">
                         {currentStep === 1 && (
@@ -94,7 +90,7 @@ const ResumeCreationModal = () => {
                                 exit={{ opacity: 0, x: 50 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                <Step2  nextStep={nextStep} goBack={goBack} />
+                                <Step2 nextStep={nextStep} goBack={goBack} />
                             </motion.div>
                         )}
 

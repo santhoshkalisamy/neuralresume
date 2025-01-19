@@ -1,26 +1,17 @@
-import {Button} from "@/components/ui/button";
-import {Experience} from "@/app/actions/resume";
+import { Button } from "@/components/ui/button";
+import { Experience } from "@/app/actions/resume";
 import React from "react";
-import {ChevronLeft, ChevronRight, PlusSquare} from "lucide-react";
+import { ChevronLeft, ChevronRight, PlusSquare } from "lucide-react";
 import ExperienceForm from "@/components/ExperienceForm";
-import {useResume} from "@/components/ResumeContext";
-
+import { useResume } from "@/components/ResumeContext";
 
 interface Step2Props {
     goBack: () => void;
     nextStep: () => void;
 }
 
-const Step2 = ({goBack, nextStep}: Step2Props) => {
-    const {newResume, setNewResume} = useResume();
-
-/*    function handleToggle(index: number, isOpen: boolean) {
-        setExpanded(prevState => {
-            const newState = [...prevState];
-            newState[index] = isOpen;
-            return newState;
-        });
-    }*/
+const Step2 = ({ goBack, nextStep }: Step2Props) => {
+    const { newResume, setNewResume } = useResume();
 
     function addExperience(experience: Experience) {
         setNewResume({
@@ -41,19 +32,14 @@ const Step2 = ({goBack, nextStep}: Step2Props) => {
     }
 
     function deleteExperience(id: string) {
-        console.log("delete", id);
-        console.log(newResume.experiences);
         const newExperiences = newResume.experiences.filter((exp) => exp.id !== id);
-        console.log(newExperiences);
         setNewResume({
             ...newResume,
             experiences: newExperiences
         });
     }
 
-
-    return (<div>
-
+    return (
         <div className="space-y-6 pb-4">
             <div className="flex flex-row justify-between">
                 <h2 className="text-lg font-bold">Experience</h2>
@@ -67,28 +53,28 @@ const Step2 = ({goBack, nextStep}: Step2Props) => {
                         endDate: "2025-01-16",
                         responsibilities: 'CompanyResponsibilitiesCompanyResponsibilitiesCompanyResponsibilitiesCompanyResponsibilitiesCompanyResponsibilitiesCompanyResponsibilities' + newResume.experiences.length
                     });
-                }
-                }>
-                    <PlusSquare/> Add experience
+                }}>
+                    <PlusSquare /> Add experience
                 </Button>
             </div>
             {newResume.experiences.map((experience) => {
-                    return (<ExperienceForm key={experience.id}
-                                            experience={experience}
-                                            deleteExperience={deleteExperience}
-                                            updateExperience={updateExperience}
-                    />);
-                }
-            )}
+                return (
+                    <ExperienceForm key={experience.id}
+                                    experience={experience}
+                                    deleteExperience={deleteExperience}
+                                    updateExperience={updateExperience}
+                    />
+                );
+            })}
             <div className="flex flex-row justify-between w-full">
                 <Button type="button" variant="outline" className="bg-gray-400 text-white" onClick={() => goBack()}>
-                    <ChevronLeft></ChevronLeft> Back
+                    <ChevronLeft /> Back
                 </Button>
                 <Button type="button" onClick={nextStep}>
-                    Next <ChevronRight></ChevronRight>
+                    Next <ChevronRight />
                 </Button>
             </div>
         </div>
-    </div>)
+    )
 }
-export default Step2
+export default Step2;
