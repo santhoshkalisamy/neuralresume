@@ -4,6 +4,7 @@ import {Card, CardContent, CardFooter, CardHeader, CardTitle} from '@/components
 import {Button} from '@/components/ui/button';
 import {getResumes, ResumeData} from "@/app/actions/resume";
 import ResumeCreationModal from "@/components/ResumeCreatorModal";
+import {ResumeProvider} from "@/components/ResumeContext";
 
 export type Resume = {
     content: ResumeData;
@@ -17,7 +18,6 @@ export type Resume = {
 const ResumeList = () => {
 
     const [resumes, setResumes] = useState<Resume[] | [] | null>([]);
-    const [loading, setLoading] = useState(false);
 
     async function loadResumes() {
         try {
@@ -28,8 +28,7 @@ const ResumeList = () => {
         }
     }
     useEffect(() => {
-        setLoading(true);
-        loadResumes().then(() => { console.log("Resumes loaded"); setLoading(false); });
+        loadResumes().then(() => { console.log("Resumes loaded");});
     }, []);
 
 
@@ -37,7 +36,9 @@ const ResumeList = () => {
         <div className="container mx-auto p-6">
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold">My Resumes</h1>
+                <ResumeProvider>
                     <ResumeCreationModal />
+                </ResumeProvider>
                 {/*<CreateResumeForm />*/}
             </div>
 
